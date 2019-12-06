@@ -22,7 +22,6 @@ axios.get('https://lambda-times-backend.herokuapp.com/topics')
 const entryPoint = document.querySelector('.topics');
 
 function Tabs(response) {
-    console.log(response);
     const tab = document.createElement('div');
     tab.classList.add('tab');
     tab.textContent = response;
