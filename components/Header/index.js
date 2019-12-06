@@ -12,6 +12,7 @@ function Header() {
 
     const title = document.createElement('h1');
     header.appendChild(title);
+    title.textContent = 'Lambda Times';
 
     const temp = document.createElement('span');
     temp.classList.add('temp');
