@@ -1,170 +1,55 @@
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
     .then(response => {
-        function data() {
-            const articles = response.data.articles;
-            const bootstrap = Cards(articles.bootstrap);
-            const javascript = Cards(articles.javascript);
-            const jquery = Cards(articles.jquery);
-            const node = Cards(articles.node);
-            const technology = Cards(articles.technology);
-            entryPoint2.appendChild(bootstrap, javascript, jquery, node, technology);
-        }
-        data();
+        console.log(response);
+        const articles = response.data.articles;
+        const javascript = articles.javascript;
+        const bootstrap = articles.bootstrap;
+        const technology = articles.technology;
+        const jquery = articles.jquery;
+        const node = articles.node;
+
+        javascript.forEach(element => {
+            document.querySelector('.cards-container').appendChild(Cards(element))
+        });
+        bootstrap.forEach(element => {
+            document.querySelector('.cards-container').appendChild(Cards(element))
+        });
+        technology.forEach(element => {
+            document.querySelector('.cards-container').appendChild(Cards(element))
+        });
+        jquery.forEach(element => {
+            document.querySelector('.cards-container').appendChild(Cards(element))
+        });
+        node.forEach(element => {
+            document.querySelector('.cards-container').appendChild(Cards(element))
+        })
     })
     .catch(error => {
-        console.log('Data not returned', error);
+        console.log(error);
     })
 
-const entryPoint2 = document.querySelector('.card');
-const container = document.querySelector('.cards-container');
+function Cards(data) {
+    const card = document.createElement('div');
+    const headline = document.createElement('div');
+    const author = document.createElement('div');
+    const imgContainer = document.createElement('div');
+    const img = document.createElement('img');
+    const name = document.createElement('span');
 
-function Cards(response) {
+    card.classList.add('card');
+    headline.classList.add('headline');
+    author.classList.add('author');
+    imgContainer.classList.add('img-container');
 
-    let articles = [];
-    for (i=0; i <= response.length; i++) {
-        articles.push(response[i]);
-    }
-    const data = articles.map(item => {
-        return item;
-    });
+    card.appendChild(headline);
+    card.appendChild(author);
+    author.appendChild(imgContainer);
+    imgContainer.appendChild(img);
+    author.appendChild(name);
 
-    function Javascript() {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        container.appendChild(card);
-     
-        const headline = document.createElement('div');
-        headline.classList.add('headline');
-        card.appendChild(headline);
-        headline.textContent = data[0].headline;
-    
-        const author = document.createElement('div');
-        author.classList.add('author');
-        card.appendChild(author);
-    
-        const imgContainer = document.createElement('div');
-        imgContainer.classList.add('img-container');
-        author.appendChild(imgContainer);
-    
-        const image = document.createElement('img');
-        imgContainer.appendChild(image);
-        image.src = data[0].authorPhoto;
-    
-        const name = document.createElement('span');
-        author.appendChild(name);
-        name.textContent = data[0].authorName;
-    }
-    Javascript();
+    headline.textContent = data.headline;
+    img.src = data.authorPhoto;
+    name.textContent = `By ${data.authorName}`;
 
-    function Bootstrap() {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        container.appendChild(card);
-     
-        const headline = document.createElement('div');
-        headline.classList.add('headline');
-        card.appendChild(headline);
-        headline.textContent = data[1].headline;
-    
-        const author = document.createElement('div');
-        author.classList.add('author');
-        card.appendChild(author);
-    
-        const imgContainer = document.createElement('div');
-        imgContainer.classList.add('img-container');
-        author.appendChild(imgContainer);
-    
-        const image = document.createElement('img');
-        imgContainer.appendChild(image);
-        image.src = data[1].authorPhoto;
-    
-        const name = document.createElement('span');
-        author.appendChild(name);
-        name.textContent = data[1].authorName;
-    }
-    Bootstrap();
-
-    function jQuery() {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        container.appendChild(card);
-     
-        const headline = document.createElement('div');
-        headline.classList.add('headline');
-        card.appendChild(headline);
-        headline.textContent = data[2].headline;
-    
-        const author = document.createElement('div');
-        author.classList.add('author');
-        card.appendChild(author);
-    
-        const imgContainer = document.createElement('div');
-        imgContainer.classList.add('img-container');
-        author.appendChild(imgContainer);
-    
-        const image = document.createElement('img');
-        imgContainer.appendChild(image);
-        image.src = data[2].authorPhoto;
-    
-        const name = document.createElement('span');
-        author.appendChild(name);
-        name.textContent = data[2].authorName;
-    }
-    jQuery();
-
-    function NodeCard() {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        container.appendChild(card);
-     
-        const headline = document.createElement('div');
-        headline.classList.add('headline');
-        card.appendChild(headline);
-        headline.textContent = data[0].headline;
-    
-        const author = document.createElement('div');
-        author.classList.add('author');
-        card.appendChild(author);
-    
-        const imgContainer = document.createElement('div');
-        imgContainer.classList.add('img-container');
-        author.appendChild(imgContainer);
-    
-        const image = document.createElement('img');
-        imgContainer.appendChild(image);
-        image.src = data[0].authorPhoto;
-    
-        const name = document.createElement('span');
-        author.appendChild(name);
-        name.textContent = data[0].authorName;
-    }
-    NodeCard();
-
-    function Technology() {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        container.appendChild(card);
-     
-        const headline = document.createElement('div');
-        headline.classList.add('headline');
-        card.appendChild(headline);
-        headline.textContent = data[0].headline;
-    
-        const author = document.createElement('div');
-        author.classList.add('author');
-        card.appendChild(author);
-    
-        const imgContainer = document.createElement('div');
-        imgContainer.classList.add('img-container');
-        author.appendChild(imgContainer);
-    
-        const image = document.createElement('img');
-        imgContainer.appendChild(image);
-        image.src = data[0].authorPhoto;
-    
-        const name = document.createElement('span');
-        author.appendChild(name);
-        name.textContent = data[0].authorName;
-    }
-    Technology();
+    return card;
 }
